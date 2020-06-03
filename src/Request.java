@@ -28,7 +28,7 @@ public class Request {
                 "<soap12:Envelope xmlns:soap12=\"http://www.w3.org/2003/05/soap-envelope\">\n" +
                 "  <soap12:Body>\n" +
                 "    <NumberToWords xmlns=\"http://www.dataaccess.com/webservicesserver/\">\n" +
-                "      <ubiNum>"+54+"</ubiNum>\n" +
+                "      <ubiNum>"+c+"</ubiNum>\n" +
                 "    </NumberToWords>\n" +
                 "  </soap12:Body>\n" +
                 "</soap12:Envelope>";
@@ -36,14 +36,6 @@ public class Request {
     public void action() {
         Client cl1  = new Client(999);
         int number = cl1.transfer;
-        body = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
-                "<soap12:Envelope xmlns:soap12=\"http://www.w3.org/2003/05/soap-envelope\">\n" +
-                "  <soap12:Body>\n" +
-                "    <NumberToWords xmlns=\"http://www.dataaccess.com/webservicesserver/\">\n" +
-                "      <ubiNum>"+number+"</ubiNum>\n" +
-                "    </NumberToWords>\n" +
-                "  </soap12:Body>\n" +
-                "</soap12:Envelope>";
 
         String responseString = "";
         String outputString = "";
