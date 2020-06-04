@@ -1,18 +1,11 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.ProtocolException;
 import java.net.URL;
 import java.nio.charset.Charset;
 
 public class Request {
-    public static void main(String[] args) {
-        Request request = new Request("C:\\Users\\Антон\\IdeaProjects\\TestData.xml" ,"https://www.dataaccess.com/webservicesserver/NumberConversion.wso");
-        request.init();
-        request.action();
-    }
+
     private String bodyPath;
     private String endPoint;
     private String body;
@@ -27,11 +20,13 @@ public class Request {
         body = XMLReader.read(bodyPath);
 
     }
-    public void action() {
-        Client cl1  = new Client(999);
+
+    public String action() {
+        int random_number = 100 + (int) (Math.random() * 999);
+        Client cl1 = new Client(random_number);
         int number = cl1.transfer;
         String b = String.valueOf(number);
-        body = body.replace("54", b);
+        body = body.replace("TANSFER", b);
 
         String responseString = "";
         String outputString = "";
@@ -69,14 +64,12 @@ public class Request {
             while ((responseString = in.readLine()) != null) {
                 outputString = outputString + responseString;
             }
-            System.out.println("Получаем следующий ответ:");
-            System.out.println(outputString);
             isr.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return outputString;
     }
-    public void end() {
-
+    public void end(){
     }
 }
