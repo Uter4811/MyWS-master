@@ -14,16 +14,21 @@ public class MyServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String requiredString = request.toString();
+        String requiredString2 = requiredString.substring(requiredString.indexOf("<ubiNum>") + 2, requiredString.indexOf("</ubiNum>"));
+        int num = Integer.parseInt(requiredString2);
 
-        Client client = new Client(999);
         response.setContentType ("text/html; charset=UTF-8");
         PrintWriter pw = response.getWriter();
+
         String s = "";
-        if (client.transfer > 10){
+        if (num > 10){
             s = "ok";
         }else s = "fail";
         String line = String.format("<status> %s </status>", s);
-        pw.write(line);
+        String s1 = response.toString();
+        System.out.println(s1);
+        pw.println(line);
 
 
     }
