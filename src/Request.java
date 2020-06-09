@@ -26,31 +26,24 @@ public class Request {
 
     private String bodyPath;
     private String endPoint;
-    private String body  = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
-            "<soap12:Envelope xmlns:soap12=\"http://www.w3.org/2003/05/soap-envelope\">\n" +
-            "  <soap12:Body>\n" +
-            "    <NumberToWords xmlns=\"http://www.dataaccess.com/webservicesserver/\">\n" +
-            "      <ubiNum>54</ubiNum>\n" +
-            "    </NumberToWords>\n" +
-            "  </soap12:Body>\n" +
-            "</soap12:Envelope>\n";
+    private String body;
 
-    public Request( String endPoint) {
-      //  this.bodyPath = bodyPath;
+    public Request(String bodyPath, String endPoint) {
+        this.bodyPath = bodyPath;
         this.endPoint = endPoint;
     }
 
     //будет считываться шаблон сообщения.
     public void init() {
-      //  body = XMLReader.read(bodyPath);
-        body  = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
+       body = XMLReader.read(bodyPath);
+       /* body  = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
                 "<soap12:Envelope xmlns:soap12=\"http://www.w3.org/2003/05/soap-envelope\">\n" +
                 "  <soap12:Body>\n" +
                 "    <NumberToWords xmlns=\"http://www.dataaccess.com/webservicesserver/\">\n" +
                 "      <ubiNum>54</ubiNum>\n" +
                 "    </NumberToWords>\n" +
                 "  </soap12:Body>\n" +
-                "</soap12:Envelope>\n";
+                "</soap12:Envelope>\n";*/
 
     }
 
