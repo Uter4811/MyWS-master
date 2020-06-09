@@ -19,23 +19,38 @@ import java.nio.charset.Charset;
 
 public class Request {
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
 
 
-    }
+    }*/
 
     private String bodyPath;
     private String endPoint;
-    private String body;
+    private String body  = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
+            "<soap12:Envelope xmlns:soap12=\"http://www.w3.org/2003/05/soap-envelope\">\n" +
+            "  <soap12:Body>\n" +
+            "    <NumberToWords xmlns=\"http://www.dataaccess.com/webservicesserver/\">\n" +
+            "      <ubiNum>54</ubiNum>\n" +
+            "    </NumberToWords>\n" +
+            "  </soap12:Body>\n" +
+            "</soap12:Envelope>\n";
 
-    public Request(String bodyPath, String endPoint) {
-        this.bodyPath = bodyPath;
+    public Request( String endPoint) {
+      //  this.bodyPath = bodyPath;
         this.endPoint = endPoint;
     }
 
     //будет считываться шаблон сообщения.
     public void init() {
-        body = XMLReader.read(bodyPath);
+      //  body = XMLReader.read(bodyPath);
+        body  = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
+                "<soap12:Envelope xmlns:soap12=\"http://www.w3.org/2003/05/soap-envelope\">\n" +
+                "  <soap12:Body>\n" +
+                "    <NumberToWords xmlns=\"http://www.dataaccess.com/webservicesserver/\">\n" +
+                "      <ubiNum>54</ubiNum>\n" +
+                "    </NumberToWords>\n" +
+                "  </soap12:Body>\n" +
+                "</soap12:Envelope>\n";
 
     }
 
@@ -58,7 +73,7 @@ public class Request {
         }
         byte[] buffer = body.getBytes();
         httpConn.setRequestProperty("Content-Length", String.valueOf(buffer.length));
-        httpConn.setRequestProperty("Content-Type", "application/soap+xml; charset=utf-8");
+        httpConn.setRequestProperty("Content-Type", "text/xml; charset=utf-8");
         try {
             httpConn.setRequestMethod("POST");
         } catch (ProtocolException e) {
@@ -86,8 +101,9 @@ public class Request {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println(Request.parseXmlFile(Request.formatXML(outputString)));
 
+       // System.out.println(Request.parseXmlFile(Request.formatXML(outputString)));
+        System.out.println(outputString);
     }
     public void end(){
     }

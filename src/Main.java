@@ -18,8 +18,9 @@ import java.io.StringWriter;
 
 public class Main {
     public static void main(String[] args) {
-        Request request = new Request("C:\\Users\\Антон\\IdeaProjects\\TestData.xml", "https://www.dataaccess.com/webservicesserver/NumberConversion.wso");
+        Request request = new Request( "http://localhost:8081/test");
         request.init();
+
         request.action();
 
     }
