@@ -17,6 +17,7 @@ import java.net.ProtocolException;
 import java.net.Socket;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.util.Date;
 
 public class Request implements Runnable {
 
@@ -56,6 +57,14 @@ public class Request implements Runnable {
         int number = cl1.transfer;
         String b = String.valueOf(number);
         body = body.replace("TANSFER", b);
+
+        Date date = new Date();
+        // Вывод текущей даты и времени с использованием toString()
+        System.out.println(date.toString());
+        //Вызов имени класса
+        System.out.println("Name of  class:" + getClass().getName());
+
+        System.out.println();
 
         String responseString = "";
         String outputString = "";
@@ -135,7 +144,10 @@ public class Request implements Runnable {
     public void run()
     {
         Request request = new Request(bodyPath, endPoint);
-        request.action();
+        int n = 0;
+        for(int i = 0; i<n; i++) {
+            request.action();
+        }
         request.init();
 
     }
