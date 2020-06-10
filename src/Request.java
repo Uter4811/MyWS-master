@@ -14,15 +14,18 @@ import javax.xml.transform.stream.StreamResult;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.ProtocolException;
+import java.net.Socket;
 import java.net.URL;
 import java.nio.charset.Charset;
 
-public class Request {
+public class Request extends Thread {
 
     /*public static void main(String[] args) {
 
 
     }*/
+
+    Socket clientSocket;
 
     private String bodyPath;
     private String endPoint;
@@ -128,4 +131,29 @@ public class Request {
         }
 
     }
+
+    public void run()
+    {
+        String remoteIp = clientSocket.getInetAddress().getHostAddress();
+        System.out.println("Got a connection from: " + remoteIp);
+        System.out.println();
+        try {
+            // Берем входной и выходной потоки сокета, теперь можем получать и отсылать данные клиенту.
+            InputStream sin = clientSocket.getInputStream();
+            OutputStream sout = clientSocket.getOutputStream();
+
+            // Конвертируем потоки в другой тип, чтоб легче обрабатывать текстовые сообщения.
+            DataInputStream in = new DataInputStream(sin);
+            DataOutputStream out = new DataOutputStream(sout);
+
+            String line = null;
+            while(true) {
+                line = in.readUTF(); // ожидаем пока клиент пришлет строку текста.
+                System.out.println(line);
+                out.writeUTF(line); // отсылаем клиенту строку текста.
+                out.flush(); // заставляем поток закончить передачу данных.
+            }
+        } catch(Exception x) {}
+    }
+
 }
