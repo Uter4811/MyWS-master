@@ -19,9 +19,16 @@ import java.io.StringWriter;
 public class Main {
     public static void main(String[] args) {
         Request request = new Request("C:\\Users\\Антон\\IdeaProjects\\TestData.xml", "http://localhost:8081/test");
-        request.init();
+       /* request.init();
+        request.action();*/
 
-        request.action();
+        Thread childThread = new Thread(request);
+        childThread.start();
+
+        Request request2 = new Request("C:\\Users\\Антон\\IdeaProjects\\TestData.xml", "http://localhost:8080/test");
+
+        Thread childThread2 = new Thread(request2);
+        childThread2.start();
 
     }
 

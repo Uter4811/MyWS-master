@@ -18,7 +18,7 @@ import java.net.Socket;
 import java.net.URL;
 import java.nio.charset.Charset;
 
-public class Request extends Thread {
+public class Request implements Runnable {
 
     /*public static void main(String[] args) {
 
@@ -134,26 +134,10 @@ public class Request extends Thread {
 
     public void run()
     {
-        String remoteIp = clientSocket.getInetAddress().getHostAddress();
-        System.out.println("Got a connection from: " + remoteIp);
-        System.out.println();
-        try {
-            // Берем входной и выходной потоки сокета, теперь можем получать и отсылать данные клиенту.
-            InputStream sin = clientSocket.getInputStream();
-            OutputStream sout = clientSocket.getOutputStream();
+        Request request = new Request(bodyPath, endPoint);
+        request.action();
+        request.init();
 
-            // Конвертируем потоки в другой тип, чтоб легче обрабатывать текстовые сообщения.
-            DataInputStream in = new DataInputStream(sin);
-            DataOutputStream out = new DataOutputStream(sout);
-
-            String line = null;
-            while(true) {
-                line = in.readUTF(); // ожидаем пока клиент пришлет строку текста.
-                System.out.println(line);
-                out.writeUTF(line); // отсылаем клиенту строку текста.
-                out.flush(); // заставляем поток закончить передачу данных.
-            }
-        } catch(Exception x) {}
     }
 
 }
